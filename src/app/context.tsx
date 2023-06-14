@@ -14,31 +14,30 @@ const ThemeContext = React.createContext({
 });
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [isDarkMode, setDarkMode] = React.useState(false);
+  const [isDarkMode, setDarkMode] = React.useState(() => {
+    const storedDarkMode = localStorage.getItem("darkMode");
+    return storedDarkMode ? JSON.parse(storedDarkMode) : false;
+  });
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
+    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
     document.body.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);
 
-  // Listen for window resize events
   React.useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    // Initial check
     handleResize();
 
-    // Add event listener
     window.addEventListener("resize", handleResize);
 
-    // Clean up function
     return () => {
-      // Remove event listener on cleanup
       window.removeEventListener("resize", handleResize);
     };
-  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
+  }, []);
 
   return (
     <ThemeContext.Provider

@@ -5,73 +5,60 @@ import TitleHeader from "../components/TitleHeader";
 export default function Page() {
   return (
     <div className="w-full lg:max-w-2xl text-center">
-      <TitleHeader id="about" title="About Me" subtitle={undefined} />
+      <TitleHeader id="about" title="About Me" />
       <Section id="about" className="text-left">
-        <p>
-          I am a professional in the field of data analysis with an emphasis on
-          leveraging data-driven strategies and bolstering customer service
-          teams. My expertise lies in the development of web applications
-          utilizing a broad spectrum of technologies. My skillset encompasses a
-          variety of programming languages including but not limited to Python,
-          JavaScript, and Ruby. Additionally, I have a strong command over
-          database languages, such as PostgreSQL and Snowflake, as well as
-          markup languages including HTML and CSS. Furthermore, I am adept at
-          working with a diverse array of software tools and platforms that
-          enhance efficiency and data visualization. These include, among
-          others, Airflow, Docker, Tableau, Sigma, and Mode. I also have
-          experience in using Google Analytics, along with a range of social
-          media and programmatic advertising platforms such as Facebook Ads,
-          Twitter Ads, and LinkedIn Ads. My competencies in these areas allow me
-          to drive insights and support data-driven decision making within the
-          organization.
+        <p className="my-4">
+          As a data analysis professional, I leverage data-driven strategies to
+          bolster customer service teams and develop web applications using
+          technologies like Python, JavaScript, and Ruby. I have a strong
+          command over database languages like PostgreSQL and Snowflake, and
+          markup languages including HTML and CSS.
         </p>
-        <p>
-          With a natural aptitude for problem-solving and a meticulous attention
-          to detail, I consistently contribute to any project. I am known for my
-          innovative approach and organizational skills, which I apply to
-          achieve goal-oriented outcomes. Upholding a robust work ethic, I
-          thrive in roles that value leadership, adaptability, and cultural
-          intelligence.
+        <p className="my-4">
+          I'm proficient with efficiency-enhancing software tools and platforms
+          such as Airflow, Docker, Tableau, Sigma, and Mode, as well as Google
+          Analytics and advertising platforms like Facebook Ads, Twitter Ads,
+          and LinkedIn Ads.
         </p>
-        <p>
-          Further, my strong communication skills enable me to articulate
-          complex concepts clearly and effectively, enhancing collaborative
-          efforts within a team. I have a proven track record in adjusting to
-          new environments and challenges, demonstrating my capacity to adapt
-          and grow.
+        <p className="my-4">
+          Known for my problem-solving aptitude, meticulous attention to detail,
+          innovative approach and organizational skills, I excel in roles that
+          value leadership, adaptability, and cultural intelligence. I
+          communicate complex concepts clearly, enhancing team collaboration,
+          and easily adapt to new environments and challenges.
         </p>
       </Section>
-      <TitleHeader id="work" title="My Work" subtitle={undefined} />
+      <TitleHeader id="work" title="My Work" />
       <Section id="work" className="text-left">
-        <p>
-          In my tenure as a professional in the field of data analysis and
-          business intelligence, I have assumed a variety of roles that span
-          from associate to senior-level positions. During this time, I have had
-          the privilege of achieving significant milestones, which include:
+        <p className="my-4">
+          In my career as a data analysis and business intelligence
+          professional, I've achieved significant milestones in roles delivering
+          data-driven insights and solutions to internal and external
+          stakeholders.
         </p>
         <ul className="list-disc list-inside space-y-2">
           <li>
-            The design and creation of internal dashboards using Looker to
-            provide actionable insights for executive and Client Success teams.
+            Designed and created internal dashboards using Looker and Tableau,
+            providing actionable insights for executive and Client Success
+            teams.
           </li>
           <li>
-            The development of a Client Success account tiering classifier,
-            utilizing SQL, Python, sklearn, and a Random Forest Classifier.
+            Developed a Client Success account tiering classifier using SQL,
+            Python, sklearn, and a Random Forest Classifier.
           </li>
           <li>
-            Collaborating with internal Enterprise stakeholders to perform
+            Collaborated with internal Enterprise stakeholders to perform
             deep-dive analysis, aiding in the identification and resolution of
             merchant performance issues.
           </li>
           <li>
-            Engaging both internal and external stakeholders to carry out ad hoc
-            analysis of retailer data, providing valuable insights and
+            Worked with both internal and external stakeholders to perform ad
+            hoc analysis of retailer data, providing valuable insights and
             recommendations.
           </li>
           <li>
-            Crafting automation scripts to bolster scalability and streamline
-            data processes across the organization, significantly improving
-            operational efficiency.
+            Crafted automation scripts to bolster scalability and streamline
+            data processes, significantly improving operational efficiency.
           </li>
         </ul>
       </Section>
