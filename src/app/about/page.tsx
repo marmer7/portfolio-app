@@ -15,10 +15,10 @@ export default function Page() {
           markup languages including HTML and CSS.
         </p>
         <p className="my-4">
-          I'm proficient with efficiency-enhancing software tools and platforms
-          such as Airflow, Docker, Tableau, Sigma, and Mode, as well as Google
-          Analytics and advertising platforms like Facebook Ads, Twitter Ads,
-          and LinkedIn Ads.
+          I&apos;m proficient with efficiency-enhancing software tools and
+          platforms such as Airflow, Docker, Tableau, Sigma, and Mode, as well
+          as Google Analytics and advertising platforms like Facebook Ads,
+          Twitter Ads, and LinkedIn Ads.
         </p>
         <p className="my-4">
           Known for my problem-solving aptitude, meticulous attention to detail,
@@ -32,8 +32,8 @@ export default function Page() {
       <Section id="work" className="text-left">
         <p className="my-4">
           In my career as a data analysis and business intelligence
-          professional, I've achieved significant milestones in roles delivering
-          data-driven insights and solutions to internal and external
+          professional, I&apos;ve achieved significant milestones in roles
+          delivering data-driven insights and solutions to internal and external
           stakeholders.
         </p>
         <ul className="list-disc list-inside space-y-2">
