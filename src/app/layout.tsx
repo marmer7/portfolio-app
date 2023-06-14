@@ -33,7 +33,7 @@ export default function RootLayout({
           className={`flex flex-col justify-between min-h-screen ${inter.className}`}
         >
           <NavBar />
-          <main className="flex flex-col items-center w-full flex-grow">
+          <main className="flex flex-col items-center w-full flex-grow px-4 sm:px-0 mb-8">
             {children}
           </main>
           <Footer />

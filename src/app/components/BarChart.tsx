@@ -23,6 +23,8 @@ ChartJS.register(
 interface BarChartProps {
   labels: string[];
   values: number[];
+  min: number;
+  max: number;
 }
 
 // Defining colors for light and dark modes
@@ -31,7 +33,7 @@ const LIGHT_BG_COLOR = "rgba(26, 145, 218, 0.2)"; // A light blue color (same hu
 const DARK_COLOR = "rgba(255, 99, 132, 1)"; // A bright pink color for the outline in dark mode
 const DARK_BG_COLOR = "rgba(255, 99, 132, 0.2)"; // A light pink color (same hue but lighter) for the bar filling in dark mode
 
-const BarChart: React.FC<BarChartProps> = ({ labels, values }) => {
+const BarChart: React.FC<BarChartProps> = ({ labels, values, min, max }) => {
   const { isDarkMode } = useTheme();
 
   const options = {
@@ -54,6 +56,8 @@ const BarChart: React.FC<BarChartProps> = ({ labels, values }) => {
     },
     scales: {
       x: {
+        min: min,
+        max: max,
         ticks: {
           color: isDarkMode ? "white" : "black", // Change x-axis labels color based on the theme
         },

@@ -90,6 +90,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
         height={144}
         width={144}
         alt={project.name}
+        className="my-2 rounded-full"
       />
     )}
     <div className="px-6 py-4">
