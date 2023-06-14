@@ -63,7 +63,7 @@ const NavBar: React.FC = () => {
             className="w-11 h-6 bg-gray-200 dark:bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white dark:peer-checked:after:border-gray-300 after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white dark:after:bg-gray-300 after:border-gray-300 dark:after:border-gray-500 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:peer-checked:bg-gray-900"
           ></div>
           <span className="hidden sm:inline-block ml-2 text-sm font-medium">
-            Dark Mode
+            {isDarkMode ? "Light" : "Dark"} Mode
           </span>
         </label>
       </div>

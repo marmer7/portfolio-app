@@ -1,6 +1,5 @@
 import React from "react";
 import Section from "../components/Section";
-import SubstackSignup from "../components/SubstackSignup";
 import TitleHeader from "../components/TitleHeader";
 
 const aboutParagraphs = [
@@ -60,14 +59,6 @@ export default function Page() {
             <li key={index}>{item}</li>
           ))}
         </ul>
-      </Section>
-      <TitleHeader
-        id="substack"
-        title="Dinner Party AI"
-        subtitle="Subscribe for AI insights and prompt ideas."
-      />
-      <Section id="substack" className="flex flex-col items-center">
-        <SubstackSignup />
       </Section>
     </div>
   );

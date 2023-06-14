@@ -32,7 +32,7 @@ const SubstackFeed = (): JSX.Element => {
     };
   }, [isMobile]); // Run when the component is mounted and whenever isMobile changes
 
-  return <div id="substack-feed-embed" />;
+  return <div id="substack-feed-embed" className="text-left" />;
 };
 
 export default SubstackFeed;

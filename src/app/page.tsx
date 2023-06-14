@@ -6,6 +6,7 @@ import Section from "./components/Section";
 import ServiceCard from "./components/ServiceCard";
 import TitleHeader from "./components/TitleHeader";
 import SubstackFeed from "./components/SubstackFeed";
+import SubstackSignup from "./components/SubstackSignup";
 
 export default function Home() {
   const labels = ["Python", "SQL", "Tableau", "JavaScript", "Data Science"];
@@ -13,26 +14,30 @@ export default function Home() {
 
   const servicesData = [
     {
-      title: "Data Analysis",
-      description: "Using SQL and Python",
+      title: "Insightful Data Analysis",
       emoji: "💻",
+      tags: ["SQL", "Python"],
     },
     {
-      title: "Dashboard Building",
-      description: "With Tableau and Sigma",
+      title: "Intuitive Dashboard Building",
       emoji: "📊",
+      tags: ["Tableau", "Looker"],
     },
     {
-      title: "Data Cleaning and Transformation",
-      description: "Using Python",
+      title: "Efficient Data Cleaning & Transformation",
       emoji: "🔧",
+      tags: ["Python", "Airflow"],
     },
     {
-      title: "Automating Data Processes",
-      description: "With Airflow and Docker",
+      title: "Cutting-edge Automation & AI Development",
       emoji: "🤖",
+      tags: ["Python", "OpenAI"],
     },
   ];
+  const smallBio = `Leveraging a comprehensive background in both Finance and Software, 
+  I've refined my expertise across diverse industry roles. My forte lies in transforming 
+  raw data into compelling insights, engineering reliable data processing pipelines, 
+  and fostering data-centric strategies for sustainable business growth.`;
 
   return (
     <div className="w-full lg:max-w-2xl text-center">
@@ -43,13 +48,7 @@ export default function Home() {
         subtitle="Data Analyst and Software Developer"
       />
       <Section id="intro" className="text-left">
-        <p className="my-4">
-          With a solid background in Finance and Computing & Data Science,
-          I&lsquo;ve honed my skills working in various roles in the industry.
-          My specialties include creating actionable insights through data
-          analysis, designing and implementing robust data processing pipelines,
-          and developing data-driven strategies for business growth.
-        </p>
+        <p className="my-4">{smallBio}</p>
       </Section>
 
       {/* Skills Section */}
@@ -66,20 +65,25 @@ export default function Home() {
             <ServiceCard
               key={index}
               title={service.title}
-              description={service.description}
               emoji={service.emoji}
+              tags={service.tags}
             />
           ))}
         </div>
       </Section>
 
       {/* Blog Section */}
-      <TitleHeader id="blog" title="Substack" />
-      <p className="my-4">
-        Stay up-to-date with my latest thoughts, research, and tutorials on AI.
-      </p>
-      <Section id="blog" className="text-left">
+      <TitleHeader id="substack" title="Substack" />
+      <Section id="substack" className="flex flex-col items-center">
+        <p className="my-2">
+          Stay up-to-date with my latest thoughts, research, and tutorials on
+          AI.
+        </p>
         <SubstackFeed />
+        <p className="my-2">
+          Subscribe to my newsletter to get the latest updates delivered
+        </p>
+        <SubstackSignup />
       </Section>
     </div>
   );
