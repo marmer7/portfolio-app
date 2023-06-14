@@ -14,12 +14,18 @@ const ThemeContext = React.createContext({
 });
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [isDarkMode, setDarkMode] = React.useState(() => {
-    const storedDarkMode = localStorage.getItem("darkMode");
-    return storedDarkMode ? JSON.parse(storedDarkMode) : false;
-  });
+  const [isDarkMode, setDarkMode] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
 
+  // Set initial theme from local storage
+  React.useEffect(() => {
+    const storedDarkMode = localStorage.getItem("darkMode");
+    if (storedDarkMode) {
+      setDarkMode(JSON.parse(storedDarkMode));
+    }
+  }, []);
+
+  // Save theme to local storage when it changes
   React.useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
     document.body.classList.toggle("dark", isDarkMode);
