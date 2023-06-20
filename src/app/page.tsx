@@ -5,8 +5,8 @@ import React from "react";
 import Section from "./components/Section";
 import ServiceCard from "./components/ServiceCard";
 import TitleHeader from "./components/TitleHeader";
-import SubstackFeed from "./components/SubstackFeed";
-import SubstackSignup from "./components/SubstackSignup";
+
+const emoji = require("emoji-dictionary");
 
 export default function Home() {
   const labels = ["Python", "SQL", "Tableau", "JavaScript", "Data Science"];
@@ -14,37 +14,41 @@ export default function Home() {
 
   const servicesData = [
     {
+      id: "automation",
+      title: "Cutting-edge Automation & AI Development",
+      emojiName: "robot",
+      tags: ["Python", "OpenAI"],
+    },
+    {
+      id: "analysis",
       title: "Insightful Data Analysis",
-      emoji: "💻",
+      emojiName: "computer",
       tags: ["SQL", "Python"],
     },
     {
+      id: "dashboard",
       title: "Intuitive Dashboard Building",
-      emoji: "📊",
+      emojiName: "bar_chart",
       tags: ["Tableau", "Looker"],
     },
     {
+      id: "cleaning",
       title: "Efficient Data Cleaning & Transformation",
-      emoji: "🔧",
+      emojiName: "wrench",
       tags: ["Python", "Airflow"],
     },
-    {
-      title: "Cutting-edge Automation & AI Development",
-      emoji: "🤖",
-      tags: ["Python", "OpenAI"],
-    },
   ];
-  const smallBio = `Leveraging a comprehensive background in both Finance and Software, 
-  I've refined my expertise across diverse industry roles. My forte lies in transforming 
-  raw data into compelling insights, engineering reliable data processing pipelines, 
-  and fostering data-centric strategies for sustainable business growth.`;
+
+  const smallBio = `Leveraging a robust background in both Finance and Software, I have honed my expertise across 
+  various industry roles. My strength lies in turning raw data into compelling insights, crafting reliable data 
+  processing pipelines, and driving data-centric strategies for sustainable business growth.`;
 
   return (
     <div className="w-full lg:max-w-2xl text-center">
       {/* Introduction Section */}
       <TitleHeader
         id="intro"
-        title="Hello, I&lsquo;m Marlon"
+        title={`Hello, I'm Marlon`}
         subtitle="Data Analyst and Software Developer"
       />
       <Section id="intro" className="text-left">
@@ -58,32 +62,19 @@ export default function Home() {
       </Section>
 
       {/* Services Section */}
-      <TitleHeader id="services" title="Services" />
-      <Section id="services" className="text-left">
+      <TitleHeader id="expertise" title="Expertise" />
+      <Section id="expertise" className="text-left">
         <div className="flex flex-wrap justify-around">
-          {servicesData.map((service, index) => (
+          {servicesData.map((service) => (
             <ServiceCard
-              key={index}
+              key={service.id}
               title={service.title}
-              emoji={service.emoji}
+              emoji={emoji.getUnicode(service.emojiName)}
               tags={service.tags}
+              aria-label={service.title}
             />
           ))}
         </div>
-      </Section>
-
-      {/* Blog Section */}
-      <TitleHeader id="substack" title="Substack" />
-      <Section id="substack" className="flex flex-col items-center">
-        <p className="my-2">
-          Stay up-to-date with my latest thoughts, research, and tutorials on
-          AI.
-        </p>
-        <SubstackFeed />
-        <p className="my-2">
-          Subscribe to my newsletter to get the latest updates delivered
-        </p>
-        <SubstackSignup />
       </Section>
     </div>
   );

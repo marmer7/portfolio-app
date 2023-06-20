@@ -8,7 +8,7 @@ const SubstackFeed = (): JSX.Element => {
 
   useEffect(() => {
     (window as any).SubstackFeedWidget = {
-      substackUrl: "dinnerpartyai.substack.com",
+      substackUrl: "https://dinnerpartyai.com",
       posts: 3,
       hidden: ["premium", "date", ...(isMobile ? ["image", "subtitle"] : [])],
     };
