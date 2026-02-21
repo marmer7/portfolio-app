@@ -8,11 +8,9 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ title, emoji, tags }) => {
   return (
-    <div className="rounded-lg shadow-lg p-4 m-2 w-64 h-64 flex flex-col items-center justify-around text-center bg-white dark:bg-gray-800 transition-colors duration-200">
+    <div className="m-2 flex h-64 w-64 flex-col items-center justify-around rounded-lg bg-white p-4 text-center shadow-lg transition-colors duration-200">
       <div className="text-6xl">{emoji}</div>
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-        {title}
-      </h2>
+      <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
       <div className="flex flex-wrap justify-center">
         {tags.map((tag, index) => (
           <span

@@ -13,19 +13,20 @@ const Footer: React.FC = () => {
     { href: "/contact", name: "Contact" },
   ];
 
-  const linkedInLink: string = process.env.NEXT_PUBLIC_LINKEDIN_LINK || "";
-  const githubLink: string = process.env.NEXT_PUBLIC_GITHUB_LINK || "";
-
   const socialLinks = [
-    { href: linkedInLink, name: "LinkedIn" },
-    { href: githubLink, name: "GitHub" },
-  ].filter((link) => link.href !== "");
+    { href: "https://linkedin.com/in/marlonmerjos", name: "LinkedIn" },
+    { href: "https://github.com/marmer7", name: "GitHub" },
+    { href: "mailto:MarlonMerjos@gmail.com", name: "Email" },
+  ];
 
   return (
-    <div className="shadow-md p-3 bg-white dark:bg-black text-black dark:text-white">
-      <div className="container mx-auto max-w-screen-lg flex items-center justify-center flex-col space-y-2">
+    <footer className="footer-shell">
+      <div className="footer-inner">
+        <p className="footer-copy">
+          Analytics leadership, predictive modeling, and self-serve data systems.
+        </p>
         <nav>
-          <ul className="flex space-x-2 sm:space-x-4 justify-center">
+          <ul className="footer-links">
             {navLinks.map((link) => {
               let isActive;
               if (link.href === "/") {
@@ -34,15 +35,15 @@ const Footer: React.FC = () => {
                 isActive = pathname.startsWith(link.href);
               }
               return (
-                <li
-                  key={link.name}
-                  className={`font-bold text-sm sm:text-base ${
-                    isActive
-                      ? "text-black dark:text-white"
-                      : "text-gray-500 dark:text-gray-400"
-                  } hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200`}
-                >
-                  <Link href={link.href}>{link.name}</Link>
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className={
+                      isActive ? "footer-link footer-link-active" : "footer-link"
+                    }
+                  >
+                    {link.name}
+                  </Link>
                 </li>
               );
             })}
@@ -50,14 +51,16 @@ const Footer: React.FC = () => {
         </nav>
 
         <nav>
-          <ul className="flex space-x-2 sm:space-x-4 justify-center">
+          <ul className="footer-links">
             {socialLinks.map((link) => {
               return (
-                <li
-                  key={link.name}
-                  className="font-bold text-sm sm:text-base text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
-                >
-                  <a href={link.href} target="_blank" rel="noopener noreferrer">
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-link"
+                  >
                     {link.name}
                   </a>
                 </li>
@@ -65,8 +68,10 @@ const Footer: React.FC = () => {
             })}
           </ul>
         </nav>
+
+        <p className="footer-meta">© {new Date().getFullYear()} Marlon Merjos</p>
       </div>
-    </div>
+    </footer>
   );
 };
 

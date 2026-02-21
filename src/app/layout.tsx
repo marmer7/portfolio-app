@@ -1,23 +1,15 @@
 import "./globals.css";
 import Footer from "./components/Footer";
-import { Inter } from "next/font/google";
 import NavBar from "./components/NavBar";
-import { ThemeProvider } from "./context";
-
-require("dotenv").config();
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Marlon's Portfolio - Data Analytics & Software Development",
+  title: "Marlon Merjos - Data Analytics Leader",
   description:
-    "Explore Marlon's professional journey in the field of data analytics and software development. Discover his skills, experience, projects, and how he can contribute to your business.",
+    "Portfolio for Marlon Merjos, a data analytics leader specializing in predictive modeling, SQL, Python, and business impact analytics.",
   url: "https://marlonm.dev",
-  author: "Marlon",
+  author: "Marlon Merjos",
   keywords:
-    "Marlon, Data Analysis, Software Development, JavaScript, Python, SQL, PostgreSQL, Web Development, Full Stack Developer, Freelance, Portfolio",
-  // image: "https://marlon.dev/images/preview.jpg",
-  // twitterUsername: "@username", // Replace with your Twitter username
+    "Marlon Merjos, Data Analytics, Revenue Analytics, Python, SQL, Predictive Modeling, dbt, Airflow, Portfolio",
 };
 
 export default function RootLayout({
@@ -26,19 +18,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider>
-      <html lang="en">
-        {/* I want to spread out the nav main and footer content */}
-        <body
-          className={`flex flex-col justify-between min-h-screen ${inter.className}`}
-        >
-          <NavBar />
-          <main className="flex flex-col items-center w-full flex-grow px-4 sm:px-0 mb-8">
-            {children}
-          </main>
-          <Footer />
-        </body>
-      </html>
-    </ThemeProvider>
+    <html lang="en">
+      {/* I want to spread out the nav main and footer content */}
+      <body
+        suppressHydrationWarning
+        className="app-body flex min-h-screen flex-col justify-between"
+      >
+        <NavBar />
+        <main className="mb-10 flex w-full flex-grow flex-col items-center px-4 pt-8 sm:px-6">
+          {children}
+        </main>
+        <Footer />
+      </body>
+    </html>
   );
 }
