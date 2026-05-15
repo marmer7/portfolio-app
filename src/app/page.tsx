@@ -1,150 +1,117 @@
-import Link from "next/link";
-import SubstackFeed from "./components/SubstackFeed";
+import Terminal from "./components/Terminal";
 
-type SkillGroup = {
-  title: string;
-  skills: string[];
-};
+const work = [
+  { period: "2024 - Present", company: "EvolutionIQ", role: "Data Scientist" },
+  { period: "2022 - 2024", company: "Attentive", role: "Revenue Analytics Manager, GTM" },
+  { period: "2021 - 2022", company: "DoorDash", role: "Senior Business Analyst, Enterprise Analytics" },
+];
 
-const skillGroups: SkillGroup[] = [
+const projects = [
   {
-    title: "Core Analytics",
-    skills: ["Python", "SQL", "A/B Testing", "Statistical Inference"],
-  },
-  {
-    title: "Machine Learning",
-    skills: ["Scikit-Learn", "XGBoost", "Segmentation", "Predictive Modeling"],
-  },
-  {
-    title: "Data Platforms",
-    skills: ["dbt", "Airflow", "Docker", "REST APIs"],
-  },
-  {
-    title: "BI & Visualization",
-    skills: ["Looker", "Tableau", "Sigma", "Mode"],
+    name: "nycdateideas",
+    url: "https://nycdateideas.com",
+    description: "date ideas for NYC, generated with LLM + live search",
+    tags: "llm · serp · parsing",
   },
 ];
 
-const impactStats = [
-  { label: "Contracted Revenue Influenced", value: "$30M+" },
-  { label: "Largest Dataset Analyzed", value: "1B+ rows" },
-  { label: "Forecast Lag Reduction", value: ">90%" },
-  { label: "Monthly Analyst Hours Saved", value: "40+" },
+const education = [
+  { year: "2017", school: "NYU Stern", degree: "B.Sc. Finance & Data Science" },
+  { year: "2017", school: "Flatiron School", degree: "Web Development Certificate" },
 ];
 
-const careerHighlights = [
-  {
-    company: "EvolutionIQ",
-    role: "Client Strategy & Advanced Analytics",
-    period: "2024 - Present",
-    detail:
-      "Owned LTD strategy across 8 insurers, built configurable Python impact pipelines, and quantified ROI tied to claim duration reduction.",
-  },
-  {
-    company: "Attentive",
-    role: "Revenue Analytics Manager, GTM",
-    period: "2022 - 2024",
-    detail:
-      "Created segmentation and ad spend projection models, then launched real-time pacing workflows to improve revenue forecasting speed.",
-  },
-  {
-    company: "DoorDash",
-    role: "Senior Business Analyst, Enterprise Analytics",
-    period: "2021 - 2022",
-    detail:
-      "Developed merchant performance and location optimization analyses that informed high-value growth recommendations.",
-  },
+const skills = [
+  { group: "analytics", items: "Python · SQL · Pandas · A/B Testing · Statistical Inference" },
+  { group: "ml", items: "Scikit-Learn · XGBoost · Feature Engineering · Segmentation · Predictive Modeling" },
+  { group: "platforms", items: "dbt · Airflow · Docker · AWS · REST APIs" },
+  { group: "bi", items: "Looker · Tableau · Sigma · Mode" },
+  { group: "ai", items: "Claude Code · Gemini API · OpenAI API · RAG · Prompt Engineering · MCP" },
 ];
 
 export default function Home() {
   return (
-    <div className="page-shell w-full max-w-6xl">
-      <section className="hero-panel">
-        <p className="eyebrow">Marlon Merjos · Brooklyn, NY</p>
-        <h1 className="hero-title">Data Analytics Leader for High-Growth Teams</h1>
-        <p className="hero-copy">
-          I design analytical systems that turn large, messy datasets into clear
-          business decisions. My work spans predictive modeling, GTM analytics,
-          and scalable reporting infrastructure.
-        </p>
-        <div className="hero-actions">
-          <a
-            href="/resume/marlon-merjos-resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            download
-            className="btn-primary"
-          >
-            Download Resume
+    <main className="term">
+      <p className="prompt">whoami</p>
+      <h1 className="name">
+        Marlon Merjos
+        <span className="cursor" aria-hidden="true" />
+      </h1>
+      <p className="tagline">Data Scientist · Brooklyn, NY</p>
+      <p className="bio">
+        I design analytical systems that turn large, messy datasets into clear
+        business decisions. Predictive modeling, GTM analytics, and scalable
+        reporting infrastructure.
+      </p>
+
+      <Terminal />
+
+      <p className="prompt">work --recent</p>
+      {work.map((w) => (
+        <div className="row" key={w.company}>
+          <span className="col-mid">
+            <span className="col-key">{w.period}</span>
+            {"  "}
+            {w.company}
+          </span>
+          <span className="col-val">{w.role}</span>
+        </div>
+      ))}
+
+      <p className="prompt">projects</p>
+      {projects.map((p) => (
+        <div className="project" key={p.name}>
+          <a className="project-name" href={p.url} target="_blank" rel="noopener noreferrer">
+            {p.url.replace(/^https?:\/\//, "")}
           </a>
-          <Link href="/contact" className="btn-secondary">
-            Contact Me
-          </Link>
+          <p className="project-desc">{p.description}</p>
+          {p.tags && <p className="project-tags">{p.tags}</p>}
         </div>
-      </section>
+      ))}
 
-      <section className="content-panel">
-        <div className="section-head">
-          <h2>What I Deliver</h2>
-          <p>Business impact backed by production-grade analytics.</p>
+      <p className="prompt">skills</p>
+      {skills.map((s) => (
+        <div className="kv" key={s.group}>
+          <span className="k">{s.group}</span>
+          <span>{s.items}</span>
         </div>
-        <div className="stats-grid">
-          {impactStats.map((stat) => (
-            <article key={stat.label} className="stat-card">
-              <p className="stat-value">{stat.value}</p>
-              <p className="stat-label">{stat.label}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      ))}
 
-      <section className="content-panel">
-        <div className="section-head">
-          <h2>Skills Snapshot</h2>
-          <p>Tools and methods I use most to solve growth and operations problems.</p>
+      <p className="prompt">education</p>
+      {education.map((e) => (
+        <div className="row" key={e.school}>
+          <span className="col-mid">
+            <span className="col-key">{e.year}</span>
+            {"  "}
+            {e.school}
+          </span>
+          <span className="col-val">{e.degree}</span>
         </div>
-        <div className="skills-grid">
-          {skillGroups.map((group) => (
-            <article key={group.title} className="skill-card">
-              <h3>{group.title}</h3>
-              <ul>
-                {group.skills.map((skill) => (
-                  <li key={skill}>{skill}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
+      ))}
 
-      <section className="content-panel">
-        <div className="section-head">
-          <h2>Recent Experience</h2>
-          <p>A focused view of the roles most relevant to analytics leadership.</p>
-        </div>
-        <div className="timeline">
-          {careerHighlights.map((item) => (
-            <article key={item.company} className="timeline-item">
-              <div className="timeline-meta">
-                <h3>{item.company}</h3>
-                <p>{item.role}</p>
-              </div>
-              <div>
-                <p className="timeline-period">{item.period}</p>
-                <p>{item.detail}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+      <p className="prompt">contact</p>
+      <div className="kv">
+        <span className="k">email</span>
+        <a href="mailto:marlonmerjos@gmail.com">marlonmerjos@gmail.com</a>
+      </div>
+      <div className="kv">
+        <span className="k">linkedin</span>
+        <a href="https://linkedin.com/in/marlonmerjos" target="_blank" rel="noopener noreferrer">
+          linkedin.com/in/marlonmerjos
+        </a>
+      </div>
+      <div className="kv">
+        <span className="k">github</span>
+        <a href="https://github.com/marmer7" target="_blank" rel="noopener noreferrer">
+          github.com/marmer7
+        </a>
+      </div>
+      <div className="kv">
+        <span className="k">resume</span>
+        <a href="/resume/marlon-merjos-resume.pdf" target="_blank" rel="noopener noreferrer">
+          marlon-merjos-resume.pdf
+        </a>
+      </div>
 
-      <section className="content-panel">
-        <div className="section-head">
-          <h2>Latest Writing</h2>
-          <p>Recent notes and essays from my Substack.</p>
-        </div>
-        <SubstackFeed />
-      </section>
-    </div>
+    </main>
   );
 }
