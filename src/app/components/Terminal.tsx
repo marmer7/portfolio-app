@@ -15,10 +15,18 @@ const HELP_LINES: [string, string][] = [
   ["contact", "contact links"],
   ["resume", "open resume PDF"],
   ["ls", "list sections"],
+  ["history", "previous commands"],
+  ["uname [-a]", "system info"],
   ["pwd", "current directory"],
   ["date", "current date/time"],
   ["echo <text>", "echo text"],
-  ["clear", "clear the terminal (or ⌘K / ctrl+K)"],
+  ["clear", "clear (⌘K / ctrl+K)"],
+];
+
+const COMMANDS = [
+  "help", "whoami", "work", "projects", "skills", "education",
+  "contact", "resume", "ls", "history", "uname", "pwd", "date",
+  "echo", "clear", "about", "experience", "edu",
 ];
 
 const WORK: [string, string, string][] = [
@@ -150,14 +158,28 @@ function Contact() {
 
 function Help() {
   const pad = Math.max(...HELP_LINES.map(([c]) => c.length));
+  const fmt = (rows: [string, string][]) =>
+    rows.map(([c, d]) => `${c.padEnd(pad + 2)}${d}`).join("\n");
+  const half = Math.ceil(HELP_LINES.length / 2);
+  return (
+    <div className="t-help-grid">
+      <pre className="t-help">{fmt(HELP_LINES.slice(0, half))}</pre>
+      <pre className="t-help">{fmt(HELP_LINES.slice(half))}</pre>
+    </div>
+  );
+}
+
+function History({ recall }: { recall: string[] }) {
+  if (recall.length === 0) return <p className="t-muted">no commands yet.</p>;
+  const pad = String(recall.length).length;
   return (
     <pre className="t-help">
-      {HELP_LINES.map(([c, d]) => `${c.padEnd(pad + 2)}${d}`).join("\n")}
+      {recall.map((c, i) => `${String(i + 1).padStart(pad)}  ${c}`).join("\n")}
     </pre>
   );
 }
 
-function exec(raw: string): React.ReactNode {
+function exec(raw: string, recall: string[]): React.ReactNode {
   const trimmed = raw.trim();
   const [name, ...rest] = trimmed.split(/\s+/);
   const lower = name.toLowerCase();
@@ -183,6 +205,12 @@ function exec(raw: string): React.ReactNode {
       return <Education />;
     case "contact":
       return <Contact />;
+    case "history":
+      return <History recall={recall} />;
+    case "uname":
+      if (args === "-a" || args === "--all")
+        return <p>Linux marlon@portfolio 16.0.0 Next.js · React 19 · TypeScript · Tailwind 4</p>;
+      return <p>Linux</p>;
     case "ls":
       return <p>whoami  work  projects  skills  education  contact  resume</p>;
     case "pwd":
@@ -240,7 +268,7 @@ export default function Terminal() {
       setHistory([]);
       return;
     }
-    const output = exec(trimmed);
+    const output = exec(trimmed, recall);
     setHistory((h) => [...h, { id: counterRef.current++, cmd: trimmed, output }]);
   }
 
@@ -249,6 +277,22 @@ export default function Terminal() {
       e.preventDefault();
       setHistory([]);
       setRecallIdx(null);
+      return;
+    }
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const cur = input.trim().toLowerCase();
+      if (!cur || cur.includes(" ")) return;
+      const matches = COMMANDS.filter((c) => c.startsWith(cur));
+      if (matches.length === 1) {
+        setInput(matches[0] + " ");
+      } else if (matches.length > 1) {
+        let prefix = matches[0];
+        for (const m of matches) {
+          while (!m.startsWith(prefix)) prefix = prefix.slice(0, -1);
+        }
+        if (prefix.length > cur.length) setInput(prefix);
+      }
       return;
     }
     if (e.key === "ArrowUp") {
@@ -325,6 +369,10 @@ export default function Terminal() {
           autoCapitalize="off"
           autoCorrect="off"
           aria-label="terminal input"
+          suppressHydrationWarning
+          data-gramm="false"
+          data-gramm_editor="false"
+          data-enable-grammarly="false"
         />
       </form>
 
