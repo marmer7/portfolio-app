@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { NAME, TAGLINE, BIO, WORK, WORK_ALL, EDUCATION, PROJECTS, SKILLS, CONTACT, type Job } from "../data";
 
 type Entry = { id: number; cmd: string; output: React.ReactNode };
 
@@ -29,73 +30,25 @@ const COMMANDS = [
   "echo", "clear", "about", "experience", "edu",
 ];
 
-const WORK: [string, string, string][] = [
-  ["2024 - Present", "EvolutionIQ", "Data Scientist"],
-  ["2022 - 2024", "Attentive", "Revenue Analytics Manager, GTM"],
-  ["2021 - 2022", "DoorDash", "Senior Business Analyst, Enterprise Analytics"],
-];
-
-const WORK_ALL: [string, string, string][] = [
-  ["2024 - Present", "EvolutionIQ", "Data Scientist"],
-  ["2022 - 2024", "Attentive", "Revenue Analytics Manager, GTM"],
-  ["2021 - 2022", "DoorDash", "Senior Business Analyst, Enterprise Analytics"],
-  ["2020 - 2021", "Criteo", "Data Analyst, Retail Media"],
-  ["2019 - 2020", "Known", "Senior Data Analyst, Media Activation"],
-  ["2018 - 2019", "Known", "QA Engineer"],
-];
-
-const EDUCATION: [string, string, string][] = [
-  ["2017", "NYU Stern", "B.Sc. Finance & Data Science"],
-  ["2017", "Flatiron School", "Web Development Certificate"],
-];
-
-const PROJECTS: { name: string; url: string; description: string; tags?: string }[] = [
-  {
-    name: "nycdateideas",
-    url: "https://nycdateideas.com",
-    description: "date ideas for NYC, generated with LLM + live search",
-    tags: "llm · serp · parsing",
-  },
-];
-
-const SKILLS: [string, string][] = [
-  ["analytics", "Python · SQL · Pandas · A/B Testing · Statistical Inference"],
-  ["ml", "Scikit-Learn · XGBoost · Feature Engineering · Segmentation · Predictive Modeling"],
-  ["platforms", "dbt · Airflow · Docker · AWS · REST APIs"],
-  ["bi", "Looker · Tableau · Sigma · Mode"],
-  ["ai", "Claude Code · Gemini API · OpenAI API · RAG · Prompt Engineering · MCP"],
-];
-
-const CONTACT: [string, string, string][] = [
-  ["email", "mailto:marlonmerjos@gmail.com", "marlonmerjos@gmail.com"],
-  ["linkedin", "https://linkedin.com/in/marlonmerjos", "linkedin.com/in/marlonmerjos"],
-  ["github", "https://github.com/marmer7", "github.com/marmer7"],
-  ["resume", "/resume/marlon-merjos-resume.pdf", "marlon-merjos-resume.pdf"],
-];
-
 function Whoami() {
   return (
     <>
-      <p className="t-name">Marlon Merjos</p>
-      <p className="t-muted">Data Scientist · Brooklyn, NY</p>
-      <p className="t-bio">
-        I design analytical systems that turn large, messy datasets into clear
-        business decisions. Predictive modeling, GTM analytics, and scalable
-        reporting infrastructure.
-      </p>
+      <p className="t-name">{NAME}</p>
+      <p className="t-muted">{TAGLINE}</p>
+      <p className="t-bio">{BIO}</p>
     </>
   );
 }
 
-function rowList(rows: [string, string, string][]) {
+function rowList(rows: Job[]) {
   return (
     <>
-      {rows.map(([period, company, role], i) => (
-        <div className="row" key={`${company}-${i}`}>
+      {rows.map((r, i) => (
+        <div className="row" key={`${r.company}-${i}`}>
           <span className="col-mid">
-            <span className="col-key">{period}</span>{"  "}{company}
+            <span className="col-key">{r.period}</span>{"  "}{r.company}
           </span>
-          <span className="col-val">{role}</span>
+          <span className="col-val">{r.role}</span>
         </div>
       ))}
     </>
@@ -111,7 +64,18 @@ function WorkAll() {
 }
 
 function Education() {
-  return rowList(EDUCATION);
+  return (
+    <>
+      {EDUCATION.map((e, i) => (
+        <div className="row" key={`${e.school}-${i}`}>
+          <span className="col-mid">
+            <span className="col-key">{e.year}</span>{"  "}{e.school}
+          </span>
+          <span className="col-val">{e.degree}</span>
+        </div>
+      ))}
+    </>
+  );
 }
 
 function Projects() {
@@ -133,10 +97,10 @@ function Projects() {
 function Skills() {
   return (
     <>
-      {SKILLS.map(([k, v]) => (
-        <div className="kv" key={k}>
-          <span className="k">{k}</span>
-          <span>{v}</span>
+      {SKILLS.map((s) => (
+        <div className="kv" key={s.group}>
+          <span className="k">{s.group}</span>
+          <span>{s.items}</span>
         </div>
       ))}
     </>
@@ -146,10 +110,10 @@ function Skills() {
 function Contact() {
   return (
     <>
-      {CONTACT.map(([k, href, label]) => (
-        <div className="kv" key={k}>
-          <span className="k">{k}</span>
-          <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+      {CONTACT.map((c) => (
+        <div className="kv" key={c.key}>
+          <span className="k">{c.key}</span>
+          <a href={c.href} target="_blank" rel="noopener noreferrer">{c.label}</a>
         </div>
       ))}
     </>
