@@ -19,11 +19,7 @@ export const WORK_ALL: Job[] = [
   { period: "2018 - 2019", company: "Known", role: "QA Engineer" },
 ];
 
-export const WORK: Job[] = [
-  { period: "2024 - Present", company: "EvolutionIQ", role: "Data Scientist" },
-  { period: "2022 - 2024", company: "Attentive", role: "Revenue Analytics Manager, GTM" },
-  { period: "2021 - 2022", company: "DoorDash", role: "Senior Business Analyst, Enterprise Analytics" },
-];
+export const WORK: Job[] = WORK_ALL.slice(0, 3);
 
 export const PROJECTS: Project[] = [
   {

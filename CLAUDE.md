@@ -15,16 +15,16 @@ No test framework is configured.
 
 ## Architecture
 
-Next.js 16 App Router site with a single route (`src/app/page.tsx`). React 19, TypeScript, Tailwind v4 via `@tailwindcss/postcss`. All visual styling lives in `src/app/globals.css` — there are no Tailwind utility classes in the JSX; components use semantic class names (`term`, `prompt`, `row`, `kv`, `t-*` for terminal pieces) defined in globals.css.
+Next.js 16 App Router site with two routes: `/` (`src/app/page.tsx`, the main portfolio) and `/links` (`src/app/links/page.tsx`, a stacked-buttons link-in-bio page). React 19, TypeScript, Tailwind v4 via `@tailwindcss/postcss`. All visual styling lives in `src/app/globals.css` — there are no Tailwind utility classes in the JSX; components use semantic class names (`term`, `prompt`, `row`, `kv`, `t-*` for terminal pieces, `links-*` for the links page) defined in globals.css. The OG share card is generated at `src/app/opengraph-image.tsx` (programmatic via `next/og` `ImageResponse`).
 
 ### Résumé data lives in one place
 
-All résumé content (`WORK_ALL`, `WORK`, `PROJECTS`, `EDUCATION`, `SKILLS`, `CONTACT`) is defined in `src/app/data.ts` and imported by both surfaces:
+All résumé content (`NAME`, `TAGLINE`, `BIO`, `WORK_ALL`, `WORK`, `PROJECTS`, `EDUCATION`, `SKILLS`, `CONTACT`) is defined in `src/app/data.ts` and imported by every surface (`/`, `/links`, `Terminal`, `layout.tsx` SEO, `opengraph-image.tsx`):
 
-1. `src/app/page.tsx` — server component with the static, scrollable view. Shows the abbreviated `WORK` (first 3 of `WORK_ALL`).
-2. `src/app/components/Terminal.tsx` — `"use client"` interactive shell embedded mid-page. Uses the full `WORK_ALL` for the `work --all` command.
+- `WORK_ALL` is the full chronological history; `WORK = WORK_ALL.slice(0, 3)` is the abbreviated view shown on `/` and by the terminal's default `work` command. The terminal's `work --all` uses `WORK_ALL`.
+- `Terminal.tsx` is the `"use client"` interactive shell embedded on `/`.
 
-When adding a job, project, or skill, edit `data.ts` only.
+When adding a job, project, skill, or contact link, edit `data.ts` only.
 
 ### Terminal component
 
@@ -36,6 +36,6 @@ When adding a job, project, or skill, edit `data.ts` only.
 
 ### Other
 
-- Resume PDF is served from `public/resume/marlon-merjos-resume.pdf` and linked from both surfaces.
+- Resume PDF is served from `public/resume/marlon-merjos-resume.pdf` and surfaced via the `CONTACT` entry in `data.ts`.
 - `metadataBase` in `layout.tsx` is `https://marlonm.dev` — update if the deploy domain changes.
-- `.env.example` lists `NEXT_PUBLIC_FORMSPRING_FORM_ID`, `NEXT_PUBLIC_LINKEDIN_LINK`, `NEXT_PUBLIC_GITHUB_LINK`, but no current code reads them (links are hardcoded in `page.tsx` and `Terminal.tsx`).
+- `.env.example` lists `NEXT_PUBLIC_FORMSPRING_FORM_ID`, `NEXT_PUBLIC_LINKEDIN_LINK`, `NEXT_PUBLIC_GITHUB_LINK`, but no current code reads them — every link lives in `data.ts`'s `CONTACT` array.
