@@ -19,12 +19,12 @@ export const WORK_ALL: Job[] = [
   { period: "2018 - 2019", company: "Known", role: "QA Engineer" },
 ];
 
-export const WORK: Job[] = WORK_ALL.slice(0, 3);
+export const WORK: Job[] = WORK_ALL.slice(0, 4);
 
 export const PROJECTS: Project[] = [
   {
     name: "nycdateideas",
-    url: "https://nycdateideas.com",
+    url: "https://www.nycdateideas.com",
     description: "date ideas for NYC, generated with LLM + live search",
     tags: "llm · serp · parsing",
   },
